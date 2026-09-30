@@ -171,7 +171,7 @@ Finds off BBDBUY
     </header>
 
     <div class="controls">
-        <input type="text" id="searchInput" class="search-bar" placeholder="Cerca prodotto (es. Jordan, Felpa, Nike)...">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Cerca prodotto (es. Balenciaga, Chrome Hearts, LV)...">
         <div class="category-buttons">
             <button class="btn-filter active" onclick="filterCategory('tutti')">Tutti</button>
             <button class="btn-filter" onclick="filterCategory('scarpe')">Scarpe</button>
@@ -183,34 +183,173 @@ Finds off BBDBUY
     <div class="grid" id="productGrid"></div>
 
     <script>
-        // LISTA DEI PRODOTTI: Modifica o aggiungi i tuoi prodotti qui sotto
         const products = [
+            // SCARPE
             {
                 id: 1,
-                title: "Air Jordan 1 Low x Travis Scott",
+                title: "Balenciaga Runner Sneakers (Blu / Argento)",
                 category: "scarpe",
-                price: "¥ 360",
-                tag: "Batch PK 4.0",
-                image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com"
+                price: "Best Quality",
+                tag: "Sneakers",
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fshop1850859027.v.weidian.com%2Fitem.html%3FitemID%3D7805764533"
             },
             {
                 id: 2,
-                title: "Felpa Trapstar Decoded Nera",
-                category: "abbigliamento",
-                price: "¥ 220",
-                tag: "Qualità Top",
-                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com"
+                title: "Balenciaga Runner Sneakers (Rosa / Argento)",
+                category: "scarpe",
+                price: "Best Quality",
+                tag: "Sneakers",
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fshop1816463806.v.weidian.com%2Fitem.html%3FitemID%3D7805643381"
             },
             {
                 id: 3,
-                title: "Cintura Nike x Stussy",
+                title: "LV Trainer Sneaker Suede Strass (Nere)",
+                category: "scarpe",
+                price: "Best Quality",
+                tag: "Sneakers",
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fk.youshop10.com%2FyS-MtIXA"
+            },
+            {
+                id: 4,
+                title: "LV Trainer Sneaker Monogram (Nero / Bianco)",
+                category: "scarpe",
+                price: "Best Quality",
+                tag: "Sneakers",
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fk.youshop10.com%2Fe-RoESDJ"
+            },
+
+            // ABBIGLIAMENTO - CHROME HEARTS
+            {
+                id: 5,
+                title: "Felpa Chrome Hearts Double Cross (Blu)",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Hoodie",
+                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7772497216"
+            },
+            {
+                id: 6,
+                title: "Felpa Chrome Hearts Multi-Cross Colorate",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Hoodie",
+                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7717207264"
+            },
+            {
+                id: 7,
+                title: "Felpa Girocollo Chrome Hearts Los Angeles",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Crewneck",
+                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7770674151"
+            },
+            {
+                id: 8,
+                title: "Felpa Zip Chrome Hearts Pink Horseshoe (Bianca)",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Zip Hoodie",
+                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7838027443"
+            },
+            {
+                id: 9,
+                title: "Felpa Zip Chrome Hearts Horseshoe (Nera)",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Zip Hoodie",
+                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7860678752"
+            },
+            {
+                id: 10,
+                title: "T-Shirt Chrome Hearts Paint Splash",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Tee",
+                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7787301906"
+            },
+            {
+                id: 11,
+                title: "Jeans Chrome Hearts Carpenter Patchwork",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Jeans",
+                image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7782625592"
+            },
+            {
+                id: 12,
+                title: "Jeans Chrome Hearts Flare Split Hem",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Jeans",
+                image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7717215032"
+            },
+
+            // ABBIGLIAMENTO - ALTRI BRAND E KNITWEAR
+            {
+                id: 13,
+                title: "Sp5der Hoodie Web Logo (Nera)",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Hoodie",
+                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7722372058"
+            },
+            {
+                id: 14,
+                title: "Maglione Knit Burberry Knight Logo",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Knitwear",
+                image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7861932714"
+            },
+            {
+                id: 15,
+                title: "Maglione Knit Saint Laurent Fluffy",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Knitwear",
+                image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773668060"
+            },
+            {
+                id: 16,
+                title: "Maglione Knit Burberry Check Pattern",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Knitwear",
+                image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7781358336"
+            },
+            {
+                id: 17,
+                title: "Pantaloni Tuta Essentials FOG",
+                category: "abbigliamento",
+                price: "Best Quality",
+                tag: "Pants",
+                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7843565245"
+            },
+            {
+                id: 18,
+                title: "Berretto in Maglia Louis Vuitton LV",
                 category: "accessori",
-                price: "¥ 45",
-                tag: "1:1 Best",
-                image: "https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com"
+                price: "Best Quality",
+                tag: "Beanie",
+                image: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=500&q=80",
+                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7843027691"
             }
         ];
 
@@ -253,7 +392,6 @@ Finds off BBDBUY
 
         document.getElementById('searchInput').addEventListener('input', displayProducts);
 
-        // Caricamento iniziale
         displayProducts();
     </script>
 </body>
