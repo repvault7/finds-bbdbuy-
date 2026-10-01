@@ -5,7 +5,7 @@ Finds off BBDBUY
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogo Reps BBDBUY</title>
+    <title>Finds BBDBUY</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -20,145 +20,141 @@ Finds off BBDBUY
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            padding: 20px;
+            padding: 20px 15px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
         }
 
-        header h1 span {
+        h1 span {
             color: var(--accent-color);
         }
 
-        .controls {
-            max-width: 1100px;
-            margin: 0 auto 30px auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: space-between;
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
         }
 
-        .search-bar {
-            flex: 1;
-            min-width: 250px;
-            padding: 12px 20px;
-            border-radius: 8px;
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
             background-color: var(--card-bg);
-            color: var(--text-color);
+            color: #fff;
             font-size: 1rem;
+            outline: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        .category-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .btn-filter {
-            padding: 10px 18px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-filter.active, .btn-filter:hover {
-            background-color: var(--accent-color);
+        input[type="text"]:focus {
             border-color: var(--accent-color);
         }
 
-        .grid {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
+        .categories {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
         }
 
-        .card {
+        .category-btn {
             background-color: var(--card-bg);
-            border-radius: 12px;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .category-btn.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
+
+        @media (min-width: 600px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 14px;
             overflow: hidden;
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card img {
+        .product-image {
             width: 100%;
-            height: 220px;
+            aspect-ratio: 1 / 1;
             object-fit: cover;
+            background-color: #000;
         }
 
-        .card-content {
-            padding: 15px;
+        .product-info {
+            padding: 12px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .card-meta {
-            display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
         }
 
-        .price {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #2ed573;
+        .product-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.3;
         }
 
-        .tag {
-            font-size: 0.8rem;
-            background-color: var(--border-color);
-            padding: 4px 8px;
-            border-radius: 4px;
-            color: var(--text-muted);
-        }
-
-        .btn-buy {
+        .buy-btn {
             display: block;
+            width: 100%;
             text-align: center;
             background-color: var(--accent-color);
             color: white;
             text-decoration: none;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 10px 0;
+            border-radius: 8px;
             font-weight: bold;
-            margin-top: auto;
-            transition: opacity 0.2s;
+            font-size: 0.85rem;
         }
 
-        .btn-buy:hover {
+        .buy-btn:hover {
             opacity: 0.9;
         }
     </style>
@@ -167,235 +163,151 @@ Finds off BBDBUY
 
     <header>
         <h1>🔥 I Migliori Finds <span>BBDBUY</span></h1>
-        <p>Seleziona un articolo e aprilo direttamente su BBDBUY</p>
+        <p class="subtitle">Seleziona un articolo e aprilo direttamente su BBDBUY</p>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Cerca prodotto (es. Balenciaga, Chrome Hearts)..." onkeyup="filterProducts()">
+        </div>
+
+        <div class="categories">
+            <button class="category-btn active" onclick="filterCategory('all', this)">Tutti</button>
+            <button class="category-btn" onclick="filterCategory('scarpe', this)">Scarpe</button>
+            <button class="category-btn" onclick="filterCategory('abbigliamento', this)">Abbigliamento</button>
+            <button class="category-btn" onclick="filterCategory('accessori', this)">Accessori</button>
+        </div>
     </header>
 
-    <div class="controls">
-        <input type="text" id="searchInput" class="search-bar" placeholder="Cerca prodotto (es. Balenciaga, Chrome Hearts, LV)...">
-        <div class="category-buttons">
-            <button class="btn-filter active" onclick="filterCategory('tutti')">Tutti</button>
-            <button class="btn-filter" onclick="filterCategory('scarpe')">Scarpe</button>
-            <button class="btn-filter" onclick="filterCategory('abbigliamento')">Abbigliamento</button>
-            <button class="btn-filter" onclick="filterCategory('accessori')">Accessori</button>
-        </div>
-    </div>
-
-    <div class="grid" id="productGrid"></div>
+    <div class="product-grid" id="productGrid"></div>
 
     <script>
         const products = [
             // SCARPE
             {
-                id: 1,
-                title: "Balenciaga Runner Sneakers (Blu / Argento)",
+                title: "Balenciaga Runner Sneaker",
                 category: "scarpe",
-                price: "Best Quality",
-                tag: "Sneakers",
-                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fshop1850859027.v.weidian.com%2Fitem.html%3FitemID%3D7805764533"
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6838813930&partnercode=w8888"
             },
             {
-                id: 2,
-                title: "Balenciaga Runner Sneakers (Rosa / Argento)",
+                title: "Nike Dunk Low Black White (Panda)",
                 category: "scarpe",
-                price: "Best Quality",
-                tag: "Sneakers",
-                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fshop1816463806.v.weidian.com%2Fitem.html%3FitemID%3D7805643381"
+                image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D4415766195&partnercode=w8888"
             },
             {
-                id: 3,
-                title: "LV Trainer Sneaker Suede Strass (Nere)",
+                title: "Jordan 4 Black Cat",
                 category: "scarpe",
-                price: "Best Quality",
-                tag: "Sneakers",
-                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fk.youshop10.com%2FyS-MtIXA"
+                image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6482046422&partnercode=w8888"
             },
             {
-                id: 4,
-                title: "LV Trainer Sneaker Monogram (Nero / Bianco)",
+                title: "Balenciaga Track 1.0",
                 category: "scarpe",
-                price: "Best Quality",
-                tag: "Sneakers",
-                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fk.youshop10.com%2Fe-RoESDJ"
+                image: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6838411234&partnercode=w8888"
+            },
+            {
+                title: "Alexander McQueen Oversized Sneaker",
+                category: "scarpe",
+                image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D4421048321&partnercode=w8888"
             },
 
-            // ABBIGLIAMENTO - CHROME HEARTS
+            // ABBIGLIAMENTO
             {
-                id: 5,
-                title: "Felpa Chrome Hearts Double Cross (Blu)",
+                title: "Chrome Hearts Zip Hoodie",
                 category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Hoodie",
-                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7772497216"
+                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6543210987&partnercode=w8888"
             },
             {
-                id: 6,
-                title: "Felpa Chrome Hearts Multi-Cross Colorate",
+                title: "Stussy Basic Hoodie",
                 category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Hoodie",
-                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7717207264"
+                image: "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5802341098&partnercode=w8888"
             },
             {
-                id: 7,
-                title: "Felpa Girocollo Chrome Hearts Los Angeles",
+                title: "Trapstar Irongate Arch Hoodie Set",
                 category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Crewneck",
-                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7770674151"
+                image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6501239874&partnercode=w8888"
             },
             {
-                id: 8,
-                title: "Felpa Zip Chrome Hearts Pink Horseshoe (Bianca)",
+                title: "Denim Tears Cotton Wreath Hoodie",
                 category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Zip Hoodie",
-                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7838027443"
+                image: "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6809876543&partnercode=w8888"
             },
             {
-                id: 9,
-                title: "Felpa Zip Chrome Hearts Horseshoe (Nera)",
+                title: "Gallery Dept. Oversized T-Shirt",
                 category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Zip Hoodie",
-                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7860678752"
-            },
-            {
-                id: 10,
-                title: "T-Shirt Chrome Hearts Paint Splash",
-                category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Tee",
-                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7787301906"
-            },
-            {
-                id: 11,
-                title: "Jeans Chrome Hearts Carpenter Patchwork",
-                category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Jeans",
-                image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7782625592"
-            },
-            {
-                id: 12,
-                title: "Jeans Chrome Hearts Flare Split Hem",
-                category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Jeans",
-                image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7717215032"
+                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6301298765&partnercode=w8888"
             },
 
-            // ABBIGLIAMENTO - ALTRI BRAND E KNITWEAR
+            // ACCESSORI
             {
-                id: 13,
-                title: "Sp5der Hoodie Web Logo (Nera)",
-                category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Hoodie",
-                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7722372058"
-            },
-            {
-                id: 14,
-                title: "Maglione Knit Burberry Knight Logo",
-                category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Knitwear",
-                image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7861932714"
-            },
-            {
-                id: 15,
-                title: "Maglione Knit Saint Laurent Fluffy",
-                category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Knitwear",
-                image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7773668060"
-            },
-            {
-                id: 16,
-                title: "Maglione Knit Burberry Check Pattern",
-                category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Knitwear",
-                image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7781358336"
-            },
-            {
-                id: 17,
-                title: "Pantaloni Tuta Essentials FOG",
-                category: "abbigliamento",
-                price: "Best Quality",
-                tag: "Pants",
-                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7843565245"
-            },
-            {
-                id: 18,
-                title: "Berretto in Maglia Louis Vuitton LV",
+                title: "Cintura BB Simon Crystal",
                 category: "accessori",
-                price: "Best Quality",
-                tag: "Beanie",
-                image: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=500&q=80",
-                bbdbuyLink: "https://www.bbdbuy.com/product?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7843027691"
+                image: "https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6102938475&partnercode=w8888"
+            },
+            {
+                title: "Cappello Chrome Hearts Trucker",
+                category: "accessori",
+                image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500",
+                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5901284756&partnercode=w8888"
             }
         ];
 
-        let currentCategory = 'tutti';
+        let selectedCategory = 'all';
 
-        function displayProducts() {
+        function renderProducts(items) {
             const grid = document.getElementById('productGrid');
-            const searchVal = document.getElementById('searchInput').value.toLowerCase();
             grid.innerHTML = '';
 
-            const filtered = products.filter(p => {
-                const matchesCat = currentCategory === 'tutti' || p.category === currentCategory;
-                const matchesSearch = p.title.toLowerCase().includes(searchVal);
-                return matchesCat && matchesSearch;
-            });
+            if (items.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">Nessun prodotto trovato.</p>';
+                return;
+            }
 
-            filtered.forEach(p => {
-                grid.innerHTML += `
-                    <div class="card">
-                        <img src="${p.image}" alt="${p.title}">
-                        <div class="card-content">
-                            <h3 class="card-title">${p.title}</h3>
-                            <div class="card-meta">
-                                <span class="price">${p.price}</span>
-                                <span class="tag">${p.tag}</span>
-                            </div>
-                            <a href="${p.bbdbuyLink}" target="_blank" class="btn-buy">Apri su BBDBUY 🛒</a>
-                        </div>
+            items.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}" class="product-image" loading="lazy">
+                    <div class="product-info">
+                        <div class="product-title">${product.title}</div>
+                        <a href="${product.link}" target="_blank" rel="noopener noreferrer" class="buy-btn">Apri su BBDBUY 🛒</a>
                     </div>
                 `;
+                grid.appendChild(card);
             });
         }
 
-        function filterCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            displayProducts();
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => {
+                const matchesSearch = p.title.toLowerCase().includes(query);
+                const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+            renderProducts(filtered);
         }
 
-        document.getElementById('searchInput').addEventListener('input', displayProducts);
+        function filterCategory(category, btn) {
+            selectedCategory = category;
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filterProducts();
+        }
 
-        displayProducts();
+        renderProducts(products);
     </script>
 </body>
 </html>
+
+
 ⁠[https://repvault7.github.io/finds-bbdbuy-/](https://repvault7.github.io/finds-bbdbuy-/)
 
 
