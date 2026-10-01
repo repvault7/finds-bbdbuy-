@@ -1,19 +1,21 @@
 # finds-bbdbuy-
 Finds off BBDBUY 
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finds BBDBUY</title>
+    <title>BBDSpread — Best BBDBuy Reps & QC Database</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #ff4757;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
+            --bg-main: #0b0f17;
+            --bg-card: #151c28;
+            --accent-red: #ff3b30;
+            --accent-glow: rgba(255, 59, 48, 0.15);
+            --text-main: #ffffff;
+            --text-muted: #8a99ad;
+            --border: #232f45;
         }
 
         * {
@@ -24,77 +26,91 @@ Finds off BBDBUY
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding: 20px 15px;
-            max-width: 1200px;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding: 20px 12px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
-        h1 {
-            font-size: 2rem;
+        .logo-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             margin-bottom: 8px;
         }
 
-        h1 span {
-            color: var(--accent-color);
+        .logo-title span {
+            color: var(--accent-red);
         }
 
-        p.subtitle {
+        .subtitle {
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        .search-container {
-            margin-bottom: 20px;
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
         }
 
-        input[type="text"] {
+        .search-box input {
             width: 100%;
-            padding: 14px 18px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            background-color: var(--card-bg);
+            padding: 14px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            background-color: var(--bg-card);
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.95rem;
             outline: none;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
         }
 
-        input[type="text"]:focus {
-            border-color: var(--accent-color);
+        .search-box input:focus {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
 
         .categories {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             overflow-x: auto;
+            justify-content: flex-start;
             padding-bottom: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .category-btn {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            padding: 8px 16px;
+        @media (min-width: 768px) {
+            .categories {
+                justify-content: center;
+            }
+        }
+
+        .cat-btn {
+            background-color: var(--bg-card);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 8px 18px;
             border-radius: 20px;
             white-space: nowrap;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 600;
             transition: all 0.2s ease;
         }
 
-        .category-btn.active {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-            font-weight: bold;
+        .cat-btn.active, .cat-btn:hover {
+            background-color: var(--accent-red);
+            color: #fff;
+            border-color: var(--accent-red);
         }
 
         .product-grid {
@@ -110,23 +126,57 @@ Finds off BBDBUY
             }
         }
 
-        .product-card {
-            background-color: var(--card-bg);
-            border-radius: 14px;
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
             overflow: hidden;
-            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
+            position: relative;
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
-        .product-image {
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #3b4d6b;
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(11, 15, 23, 0.85);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 2;
+        }
+
+        .badge-trending { color: #ff3b30; }
+        .badge-popular { color: #ffcc00; }
+
+        .img-container {
             width: 100%;
             aspect-ratio: 1 / 1;
-            object-fit: cover;
+            overflow: hidden;
             background-color: #000;
         }
 
-        .product-info {
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
             padding: 12px;
             display: flex;
             flex-direction: column;
@@ -134,27 +184,42 @@ Finds off BBDBUY
             justify-content: space-between;
         }
 
-        .product-title {
-            font-size: 0.95rem;
+        .title {
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 12px;
             line-height: 1.3;
+            margin-bottom: 8px;
+            color: #e2e8f0;
         }
 
-        .buy-btn {
+        .price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .btn-buy {
             display: block;
             width: 100%;
             text-align: center;
-            background-color: var(--accent-color);
-            color: white;
+            background-color: var(--accent-red);
+            color: #fff;
             text-decoration: none;
             padding: 10px 0;
-            border-radius: 8px;
-            font-weight: bold;
+            border-radius: 10px;
+            font-weight: 700;
             font-size: 0.85rem;
+            transition: opacity 0.2s;
         }
 
-        .buy-btn:hover {
+        .btn-buy:hover {
             opacity: 0.9;
         }
     </style>
@@ -162,18 +227,18 @@ Finds off BBDBUY
 <body>
 
     <header>
-        <h1>🔥 I Migliori Finds <span>BBDBUY</span></h1>
-        <p class="subtitle">Seleziona un articolo e aprilo direttamente su BBDBUY</p>
-        
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Cerca prodotto (es. Balenciaga, Chrome Hearts)..." onkeyup="filterProducts()">
+        <div class="logo-title">BBD<span>SPREAD</span></div>
+        <p class="subtitle">Best BBDBuy Reps & QC Database</p>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search thousands of verified reps..." onkeyup="filterProducts()">
         </div>
 
         <div class="categories">
-            <button class="category-btn active" onclick="filterCategory('all', this)">Tutti</button>
-            <button class="category-btn" onclick="filterCategory('scarpe', this)">Scarpe</button>
-            <button class="category-btn" onclick="filterCategory('abbigliamento', this)">Abbigliamento</button>
-            <button class="category-btn" onclick="filterCategory('accessori', this)">Accessori</button>
+            <button class="cat-btn active" onclick="filterCategory('all', this)">All Products</button>
+            <button class="cat-btn" onclick="filterCategory('scarpe', this)">Shoes</button>
+            <button class="cat-btn" onclick="filterCategory('abbigliamento', this)">Apparel</button>
+            <button class="cat-btn" onclick="filterCategory('accessori', this)">Accessories</button>
         </div>
     </header>
 
@@ -185,78 +250,69 @@ Finds off BBDBUY
             {
                 title: "Balenciaga Runner Sneaker",
                 category: "scarpe",
+                price: "$68.50",
+                badge: "🔥 Trending",
+                badgeClass: "badge-trending",
                 image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500",
                 link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6838813930&partnercode=w8888"
             },
             {
                 title: "Nike Dunk Low Black White (Panda)",
                 category: "scarpe",
+                price: "$28.00",
+                badge: "★ Popular",
+                badgeClass: "badge-popular",
                 image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500",
                 link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D4415766195&partnercode=w8888"
             },
             {
                 title: "Jordan 4 Black Cat",
                 category: "scarpe",
+                price: "$45.00",
+                badge: "🔥 Trending",
+                badgeClass: "badge-trending",
                 image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=500",
                 link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6482046422&partnercode=w8888"
             },
             {
                 title: "Balenciaga Track 1.0",
                 category: "scarpe",
+                price: "$62.00",
+                badge: "",
+                badgeClass: "",
                 image: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=500",
                 link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6838411234&partnercode=w8888"
-            },
-            {
-                title: "Alexander McQueen Oversized Sneaker",
-                category: "scarpe",
-                image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500",
-                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D4421048321&partnercode=w8888"
             },
 
             // ABBIGLIAMENTO
             {
                 title: "Chrome Hearts Zip Hoodie",
                 category: "abbigliamento",
+                price: "$38.00",
+                badge: "🔥 Trending",
+                badgeClass: "badge-trending",
                 image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500",
                 link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6543210987&partnercode=w8888"
             },
             {
                 title: "Stussy Basic Hoodie",
                 category: "abbigliamento",
+                price: "$22.50",
+                badge: "★ Popular",
+                badgeClass: "badge-popular",
                 image: "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=500",
                 link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5802341098&partnercode=w8888"
-            },
-            {
-                title: "Trapstar Irongate Arch Hoodie Set",
-                category: "abbigliamento",
-                image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500",
-                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6501239874&partnercode=w8888"
-            },
-            {
-                title: "Denim Tears Cotton Wreath Hoodie",
-                category: "abbigliamento",
-                image: "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=500",
-                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6809876543&partnercode=w8888"
-            },
-            {
-                title: "Gallery Dept. Oversized T-Shirt",
-                category: "abbigliamento",
-                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500",
-                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6301298765&partnercode=w8888"
             },
 
             // ACCESSORI
             {
                 title: "Cintura BB Simon Crystal",
                 category: "accessori",
+                price: "$19.00",
+                badge: "★ Popular",
+                badgeClass: "badge-popular",
                 image: "https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=500",
                 link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D6102938475&partnercode=w8888"
-            },
-            {
-                title: "Cappello Chrome Hearts Trucker",
-                category: "accessori",
-                image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500",
-                link: "https://www.bbdbuy.com/index/item/index.html?tp=weidian&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D5901284756&partnercode=w8888"
             }
         ];
 
@@ -267,18 +323,24 @@ Finds off BBDBUY
             grid.innerHTML = '';
 
             if (items.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">Nessun prodotto trovato.</p>';
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px 0;">No products found.</p>';
                 return;
             }
 
             items.forEach(product => {
                 const card = document.createElement('div');
-                card.className = 'product-card';
+                card.className = 'card';
                 card.innerHTML = `
-                    <img src="${product.image}" alt="${product.title}" class="product-image" loading="lazy">
-                    <div class="product-info">
-                        <div class="product-title">${product.title}</div>
-                        <a href="${product.link}" target="_blank" rel="noopener noreferrer" class="buy-btn">Apri su BBDBUY 🛒</a>
+                    ${product.badge ? `<div class="badge ${product.badgeClass}">${product.badge}</div>` : ''}
+                    <div class="img-container">
+                        <img src="${product.image}" alt="${product.title}" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <div class="title">${product.title}</div>
+                        <div class="price-row">
+                            <span class="price">${product.price}</span>
+                        </div>
+                        <a href="${product.link}" target="_blank" rel="noopener noreferrer" class="btn-buy">Buy on BBDBUY 🛒</a>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -297,7 +359,7 @@ Finds off BBDBUY
 
         function filterCategory(category, btn) {
             selectedCategory = category;
-            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             filterProducts();
         }
